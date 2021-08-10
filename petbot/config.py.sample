@@ -1,0 +1,4 @@
+CONSUMER_KEY = 'abc123...'
+CONSUMER_SECRET = 'def457...'
+ACCESS_KEY = 'ghi789...'
+ACCESS_SECRET = 'jkl987...'
