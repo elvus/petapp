@@ -2,12 +2,12 @@
 import React from "react"
 import { Card, Image, Media, Title, Content } from "rbx";
 
-const InfoContainer = ()=>{
+const InfoContainer = ({text, img})=>{
     return(
     <Card>
       <Card.Image>
         <Image.Container size="3by2">
-          <Image src="https://bulma.io/images/placeholders/1280x960.png" />
+          <Image src={img} />
         </Image.Container>
       </Card.Image>
       <Card.Content>
@@ -22,11 +22,7 @@ const InfoContainer = ()=>{
           </Media.Item>
         </Media>
         <Content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-          iaculis mauris. <a href="#@bulmaio">@bulmaio</a>.{' '}
-          <a href="#css">#css</a> <a href="#responsive">#responsive</a>
-          <br />
-          <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          {text}
         </Content>
       </Card.Content>
     </Card>)
