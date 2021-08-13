@@ -9,6 +9,7 @@ api = tweepy.API(auth)
 class MyStreamListener(tweepy.StreamListener):
     def on_status(self, status):
         tweet= api.get_status(status.id)
+        tweet.text.index("busca")
         if tweet.in_reply_to_status_id is not None:
             mention_tweet= api.get_status(tweet.in_reply_to_status_id)
             if not tweet.retweeted :
@@ -28,4 +29,4 @@ class MyStreamListener(tweepy.StreamListener):
 user = api.verify_credentials()
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
-myStream.filter(track=['@rescatando_paws'])
+myStream.filter(track=['@buscapatitas'])
