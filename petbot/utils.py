@@ -32,3 +32,17 @@ def tweet_media(tweet):
                 }
             )
     return media
+
+def classify_tweet(text):
+    if "busca hogar" in text.lower():
+        return "Encontremos un hogar"
+    elif "adopcion" in text.lower():
+        return "Encontremos un hogar"
+    elif "buscamos" in text.lower():
+        return "A encontrarlo"
+    elif "se perdio" in text.lower():
+        return "A encontrarlo"
+    elif "perdido" in text.lower():
+        return "A encontrarlo"
+    elif "ayuda" in text.lower():
+        return "Busquemos Ayuda"

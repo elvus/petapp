@@ -1,6 +1,6 @@
 import tweepy
 from config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET
-from utils import save_tweet
+from utils import save_tweet, classify_tweet
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
@@ -9,16 +9,15 @@ api = tweepy.API(auth)
 class MyStreamListener(tweepy.StreamListener):
     def on_status(self, status):
         tweet= api.get_status(status.id)
-        tweet.text.index("busca")
         if tweet.in_reply_to_status_id is not None:
             mention_tweet= api.get_status(tweet.in_reply_to_status_id)
-            if not tweet.retweeted :
+            if not mention_tweet.retweeted :
                 try:
                     mention_tweet.retweet()
                     save_tweet(mention_tweet)
+                    api.update_status(status = classify_tweet(tweet.text), in_reply_to_status_id = tweet.id , auto_populate_reply_metadata=True)
                 except Exception as e:
-                    pass
-                
+                    print(e)
         return True
     
     def on_error(self, status_code):
