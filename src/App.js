@@ -7,20 +7,6 @@ import InfoContainer from './componentes/pets';
 import {useState, useEffect} from 'react';
 
 function App() {
-
-  const [items, setItems] = useState([])
-
-  useEffect(() => {
-      fetch("http://127.0.0.1:5000/api/tweets")
-        .then(res => res.json())
-        .then(
-          (result) => {
-            setItems(result);
-          },
-        )
-  }, [])
-
-
   return (
     <Content>
       <Navbar color="info">
@@ -57,17 +43,7 @@ function App() {
       </Navbar>
       <Section>
         <Content>
-          <Column.Group>
-            {
-              items.map(i => {
-                return(
-                  <Column size={4}>
-                    <InfoContainer text={i.tweet} img={i.pics.length > 0 ? i.pics[0].media : "https://bulma.io/images/placeholders/1280x960.png"} />
-                  </Column>
-                )
-              })
-            }
-          </Column.Group>
+          <InfoContainer/>
         </Content>
       </Section>
     </Content>
