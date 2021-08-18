@@ -1,10 +1,9 @@
 import logo from './logo.png';
 import './App.css';
 import "rbx/index.css";
-import { Navbar, Content, Column, Section } from "rbx";
+import { Navbar, Content, Section } from "rbx";
 import { FaGithub } from 'react-icons/fa';
 import InfoContainer from './componentes/pets';
-import {useState, useEffect} from 'react';
 
 function App() {
   return (
