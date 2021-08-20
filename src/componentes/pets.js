@@ -1,6 +1,6 @@
-
 import React, {useState, useEffect} from "react"
-import { Card, Image, Media, Title, Content, Column } from "rbx";
+import { Card, Image, Button,  Content, Column, Icon } from "rbx";
+import { FaTwitter } from 'react-icons/fa';
 
 const InfoContainer = () =>{ 
   const [items, setItems] = useState([])
@@ -9,27 +9,25 @@ const InfoContainer = () =>{
 
   function PetContainer({text, img}){
     return(<Column size={4}>
-            <Card>
+            <Card className="Pet-card">
               <Card.Image>
                 <Image.Container size="3by2">
                   <Image src={img} />
                 </Image.Container>
               </Card.Image>
               <Card.Content>
-                <Media>
-                  <Media.Item>
-                    <Title as="p" size={4}>
-                      John Smith
-                    </Title>
-                    <Title as="p" subtitle size={6}>
-                      @johnsmith
-                    </Title>
-                  </Media.Item>
-                </Media>
                 <Content>
                   {text}
                 </Content>
               </Card.Content>
+              <Card.Footer>
+                <Button color="info" size="small" key="info">
+                  <Icon>
+                    <FaTwitter />
+                  </Icon>
+                  <span>Ir al tweet</span>
+                </Button>
+              </Card.Footer>    
             </Card>
           </Column>)
   }
@@ -45,7 +43,10 @@ const InfoContainer = () =>{
   }, []);
 
   items.map((item, index)=>{
-    columns.push(<PetContainer key={index} text={item.tweet} img={item.pics.length > 0 ? item.pics[0].media : "https://bulma.io/images/placeholders/1280x960.png"}/>);
+    columns.push(<PetContainer key={index} 
+                               text={item.tweet} 
+                               img={item.pics.length > 0 ? item.pics[0].media : "https://bulma.io/images/placeholders/1280x960.png"}
+                />);
     if(index !== 0){
       if(index%3===0 || index === (items.length-1)){
         group.push(<Column.Group key={index}>{columns}</Column.Group>);
