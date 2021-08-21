@@ -13,6 +13,8 @@ def save_tweet(tweet):
         db.pets.insert_one({
             "tweet_id": tweet.id,
             "tweet": tweet.text,
+            "tweet_url":"https://twitter.com/%s/status/%s"%(str(tweet.user.screen_name), str(tweet.id)),
+            "username": tweet.user.screen_name,
             'pics':tweet_media(tweet),
             "retweet": True,
             "status": None,
