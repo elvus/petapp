@@ -1,4 +1,4 @@
-import logo from './logo.png';
+import logo from './logo.svg';
 import './App.css';
 import "rbx/index.css";
 import { Navbar, Content, Section } from "rbx";
@@ -14,31 +14,18 @@ function App() {
             <img
               src={logo}
               alt="Bulma: Free, open source, & modern CSS framework based on Flexbox"
-              width="100"
             />
+            <span> Busca Patitas</span>
           </Navbar.Item>
           <Navbar.Burger />
         </Navbar.Brand>
-        {/*
         <Navbar.Menu>
-            <Navbar.Segment align="end">
-              <Navbar.Item as="div">
-                <Field kind="group">
-                  <Control>
-                    <Button
-                      as="a"
-                      color="dark"
-                      href="https://github.com/dfee/rbx"
-                    >
-                      <FaGithub />
-                      <span> GitHub</span>
-                    </Button>
-                  </Control>
-                </Field>
-              </Navbar.Item>
-            </Navbar.Segment>
-          </Navbar.Menu>
-          */}
+          <Navbar.Segment align="start">
+            <Navbar.Item href="#" active={true}>Adopta</Navbar.Item>
+            <Navbar.Item href="#">Encuentra</Navbar.Item>
+            <Navbar.Item href="#">Ayuda</Navbar.Item>
+          </Navbar.Segment>
+        </Navbar.Menu>
       </Navbar>
       <Section>
         <Content>
