@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react"
-import { Card, Image, Button,  Content, Column, Icon } from "rbx";
+import { Card, Image, Button,  Content, Column, Icon, Section } from "rbx";
 import { FaTwitter } from 'react-icons/fa';
 
-const InfoContainer = () =>{ 
+const Adopta = () =>{ 
   const [items, setItems] = useState([])
   let columns = []
   const group   = []
 
-  function PetContainer({text, img}){
+  function PetContainer({text, img, link}){
     return(<Column size={4}>
             <Card className="Pet-card">
               <Card.Image>
@@ -21,7 +21,7 @@ const InfoContainer = () =>{
                 </Content>
               </Card.Content>
               <Card.Footer>
-                <Button color="info" size="small" key="info">
+                <Button color="info" size="small" key="info" as="a" href={link} target="_blank">
                   <Icon>
                     <FaTwitter />
                   </Icon>
@@ -46,6 +46,7 @@ const InfoContainer = () =>{
     columns.push(<PetContainer key={index} 
                                text={item.tweet} 
                                img={item.pics.length > 0 ? item.pics[0].media : "https://bulma.io/images/placeholders/1280x960.png"}
+                               link={item.tweet_url}
                 />);
     if(index !== 0){
       if(index%3===0 || index === (items.length-1)){
@@ -56,6 +57,12 @@ const InfoContainer = () =>{
     return group;
   })
   
-  return group;
+  return(
+    <Section>
+      <Content>
+        {group}
+      </Content>
+    </Section>
+  );
 }
-export default InfoContainer;
+export default Adopta;
