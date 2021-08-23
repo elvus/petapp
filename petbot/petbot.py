@@ -15,7 +15,7 @@ class MyStreamListener(tweepy.StreamListener):
                 try:
                     mention_tweet.retweet()
                     save_tweet(mention_tweet)
-                    api.update_status(status = classify_tweet(tweet.text), in_reply_to_status_id = tweet.id , auto_populate_reply_metadata=True)
+                    api.update_status(status = classify_tweet(tweet.text, tweet.in_reply_to_status_id), in_reply_to_status_id = tweet.id , auto_populate_reply_metadata=True)
                 except Exception as e:
                     print(e)
         return True

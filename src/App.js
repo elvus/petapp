@@ -21,7 +21,7 @@ function App() {
                 src={logo}
                 alt="Bulma: Free, open source, & modern CSS framework based on Flexbox"
               />
-              <span> Busca Patitas</span>
+              <span>Busca Patitas</span>
             </Navbar.Item>
             <Navbar.Burger />
           </Navbar.Brand>

@@ -14,10 +14,11 @@ def save_tweet(tweet):
             "tweet_id": tweet.id,
             "tweet": tweet.text,
             "tweet_url":"https://twitter.com/%s/status/%s"%(str(tweet.user.screen_name), str(tweet.id)),
-            "username": tweet.user.screen_name,
+            "usuario": tweet.user.screen_name,
             'pics':tweet_media(tweet),
             "retweet": True,
-            "status": None,
+            "activo": True,
+            "estado": None,
             "tweet_date": tweet.created_at,
             "create_at": datetime.now()
         })
@@ -35,16 +36,24 @@ def tweet_media(tweet):
             )
     return media
 
-def classify_tweet(text):
-    if "busca hogar" in text.lower():
-        return "Encontremos un hogar"
-    elif "adopcion" in text.lower():
-        return "Encontremos un hogar"
-    elif "buscamos" in text.lower():
-        return "A encontrarlo"
-    elif "se perdio" in text.lower():
-        return "A encontrarlo"
-    elif "perdido" in text.lower():
-        return "A encontrarlo"
+def classify_tweet(text, id):
+    db = connection()
+    estado = ""
+    msg = ""
+    if "busca hogar" in text.lower() or "adopcion" in text.lower():
+        estado = "adopcion"
+        msg = "Encontremos un hogar"
+    elif "buscamos" in text.lower() or "se perdio" in text.lower() or "perdido" in text.lower():
+        estado = "perdido"
+        msg = "A encontrarlo"
     elif "ayuda" in text.lower():
-        return "Busquemos Ayuda"
+        estado = "ayuda"
+        msg = "Busquemos Ayuda"
+    
+    try:
+        db.pets.update_one({"tweet_id": id},
+        {"$set":{"estado": estado}})
+    except Exception as e:
+        print(e)
+    
+    return msg
