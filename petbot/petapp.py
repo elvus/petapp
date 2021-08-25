@@ -1,7 +1,7 @@
 from flask import Flask, Response, render_template
 from flask_cors import CORS
 from bson.json_util import dumps
-from utils import connection
+from utils import connection, listar_tweets
 
 app = Flask(__name__, static_folder='./build', static_url_path='/')
 cors = CORS(app, resources={r"/api/*": {"origins":"*"}})
@@ -18,6 +18,10 @@ def api_root():
     }))
     return Response(response=response, status=200, mimetype='application/json')
 
+@app.route("/api/<path:q>",methods=['GET', 'POST'])
+def query(q):
+    response=dumps(listar_tweets(q))
+    return Response(response=response, status=200, mimetype='application/json')
 
 if __name__=="__main__":
         app.run()
