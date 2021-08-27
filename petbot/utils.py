@@ -25,6 +25,13 @@ def save_tweet(tweet):
     except Exception as e:
         print(e)
 
+def listar_tweets(estado):
+    db = connection()
+    try:
+       return db.pets.find({"estado": estado})
+    except Exception as e:
+        print(e)
+
 def tweet_media(tweet):
     media =[]
     if 'media' in tweet.entities:

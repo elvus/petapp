@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import { Card, Image, Button,  Content, Column, Icon, Section } from "rbx";
 import { FaTwitter } from 'react-icons/fa';
 
-const Adopta = () =>{ 
+const ListaPet = (props) =>{ 
   const [items, setItems] = useState([])
   let columns = []
   const group   = []
@@ -33,14 +33,14 @@ const Adopta = () =>{
   }
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api/tweets")
+    fetch(`http://127.0.0.1:5000/api/${props.url}`)
       .then(res => res.json())
       .then(
         (result) => {
           setItems(result);
-        },
+        }
       )
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   items.map((item, index)=>{
     columns.push(<PetContainer key={index} 
@@ -48,7 +48,7 @@ const Adopta = () =>{
                                img={item.pics.length > 0 ? item.pics[0].media : "https://bulma.io/images/placeholders/1280x960.png"}
                                link={item.tweet_url}
                 />);
-    if(index !== 0){
+    if(index !== -1){
       if(index%3===0 || index === (items.length-1)){
         group.push(<Column.Group key={index}>{columns}</Column.Group>);
         columns = [];
@@ -65,4 +65,5 @@ const Adopta = () =>{
     </Section>
   );
 }
-export default Adopta;
+
+export default ListaPet;
